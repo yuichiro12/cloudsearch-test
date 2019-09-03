@@ -32,7 +32,7 @@ func main() {
 		}
 	})
 
-	log.Fatal(http.ListenAndServe(":8443", router))
+	log.Fatal(http.ListenAndServe(":8080", router))
 }
 
 func NewCloudSearchDomainClient() *cloudsearchdomain.CloudSearchDomain {
