@@ -1,6 +1,19 @@
+###########
+##  bin  ##
+###########
+FROM golang:alpine AS bin
+RUN mkdir -p /usr/local/bin
+RUN mkdir -p /usr/local/share
+WORKDIR /usr/local/share
+COPY . /usr/local/share
+RUN go build -o /usr/local/bin/cloudsearch-test
+
+############
+##  base  ##
+############
 FROM alpine:latest AS base
 RUN apk add --no-cache ca-certificates
-COPY ./build/bin /usr/local/bin
+COPY --from=bin /usr/local/bin /usr/local/bin
 CMD ["/usr/local/bin/cloudsearch-test"]
 
 #############
