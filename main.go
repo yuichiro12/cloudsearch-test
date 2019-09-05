@@ -18,6 +18,12 @@ func main() {
 	cs := NewCloudSearchDomainClient()
 
 	router := mux.NewRouter()
+	router.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
+		if _, err := io.WriteString(w, "cloudsearch-test app"); err != nil {
+			log.Fatal(err)
+		}
+	})
+
 	router.HandleFunc("/search", func(w http.ResponseWriter, r *http.Request) {
 		val := r.URL.Query()
 		q := val.Get("q")
